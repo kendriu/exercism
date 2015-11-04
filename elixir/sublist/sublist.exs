@@ -14,7 +14,7 @@ defmodule Sublist do
 
   defp _compare([], _, _), do: :unequal
   defp _compare(_, [], result), do: result
-  defp _compare(a=[ha | ta], b=[hb | _], result) when ha === hb do
+  defp _compare(a=[h | ta], b=[h | _], result) do
     if _local_compare(a, b) == :unequal do
       _compare(ta, b, result)
     else
@@ -24,7 +24,7 @@ defmodule Sublist do
   defp _compare([_ | t], b, result),do: _compare(t,b, result)
 
   defp _local_compare(_, []),  do: []
-  defp _local_compare([ha | ta], [hb | tb]) when ha === hb,  do: _local_compare(ta, tb)
+  defp _local_compare([h | ta], [h | tb]), do: _local_compare(ta, tb)
   defp _local_compare(_, _), do: :unequal
 
 end
