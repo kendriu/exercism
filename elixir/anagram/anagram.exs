@@ -5,12 +5,9 @@ defmodule Anagram do
   @spec match(String.t, [String.t]) :: [String.t]
   def match(_, []), do: []
   def match(base, [base | t]), do: match(base, t)
-  def match(base, [h | t]) do
-    if anagrams?(String.downcase(base), String.downcase(h)) do
-      [h | match(base, t)]
-    else
-      match(base, t)
-    end
+  def match(base, candidates) do
+    dc = &String.downcase/1
+    Enum.filter(candidates, &anagrams?(dc.(base), dc.(&1)))
   end
 
   def anagrams?(base, base), do: false
