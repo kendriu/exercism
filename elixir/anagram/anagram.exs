@@ -10,8 +10,8 @@ defmodule Anagram do
     Enum.filter(candidates, &anagrams?(dc.(base), dc.(&1)))
   end
 
-  def anagrams?(base, base), do: false
-  def anagrams?(base, candidate) do
+  def anagram?(base, base), do: false
+  def anagram?(base, candidate) do
     sort = &(&1
                |> String.to_char_list
                |> Enum.sort)
